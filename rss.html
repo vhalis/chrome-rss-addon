@@ -2,7 +2,7 @@
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-		<meta http-equiv="Access-Control-Allow-Origin" content="*">
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <title>Untitled</title>
 		<script type="text/javascript" src="jquery-1.7.1.min.js" charset="utf-8"></script>
 		<script type="text/javascript">
@@ -55,6 +55,14 @@ function get_rss_feed() {
  
 };
 
+function dumb() {
+	$.get('www.google.com', function(d) {
+			$('#feedContent').append(d);
+			alert("success");
+		});
+
+}
+
 
 </script>
 </head>
@@ -64,7 +72,7 @@ function get_rss_feed() {
 <div id="ui">
 <form id="selectParser" action="">
 <label>Select a feed:</label>
-<select id="diffFeeds" onchange="get_rss_feed();">
+<select id="diffFeeds" onchange="dumb();">
 	<option value="">Select</option>
 	<option value="http://feeds.feedburner.com/aralbalkan">Aral Balkan</option>
 	<option value="http://www.bit-101.com/blog/?feed=rss2">Bit-101</option>
