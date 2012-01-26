@@ -13,7 +13,7 @@ function get_rss_feed_xml() {
 
 	xml.onreadystatechange = function() {
 		if(xml.readyState == 4) {
-			$('#feedContent').append(xml.responseText);
+			$('#feedContent').append(xml.responseXML);
 			//$('#feedContent').append('wat');
 		}
 	}
@@ -56,8 +56,8 @@ function get_rss_feed() {
 };
 
 function dumb() {
-	$.get('www.google.com', function(d) {
-			$('#feedContent').append(d);
+	$.get('sometext.txt', function(d) {
+			$('#feedContent').append($(d));
 			alert("success");
 		});
 
@@ -72,7 +72,7 @@ function dumb() {
 <div id="ui">
 <form id="selectParser" action="">
 <label>Select a feed:</label>
-<select id="diffFeeds" onchange="dumb();">
+<select id="diffFeeds" onchange="get_rss_feed();">
 	<option value="">Select</option>
 	<option value="http://feeds.feedburner.com/aralbalkan">Aral Balkan</option>
 	<option value="http://www.bit-101.com/blog/?feed=rss2">Bit-101</option>
