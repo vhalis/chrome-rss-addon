@@ -3,25 +3,55 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
 	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-	<title>Untitled</title>
+	<title>RSS Reader Chrome Addon</title>
 	<script type="text/javascript" src="jquery-1.7.1.min.js" charset="utf-8"></script>
 	<script type="text/javascript" src="https://www.google.com/jsapi"></script>
-	<script type="text/javascript" src="jquery.gfeed.js"></script>
 	<script type="text/javascript">
-    // when the DOM is ready, convert the feed anchors into feed content 
-    $(document).ready(function() { 
-        $('a.feed').gFeed( { target: '#diffFeeds', tabs: true } ); 
-    }); 
+    google.load("feeds", "1");
+
+		function init() {
+			var g = new google.feeds.FeedControl();
+			//var s = $('#diffFeeds');
+
+			//for (var i=0; i < s.length; i++) {
+			//	g.addFeed(s.options[i].text, s.options[i].value);
+			//}
+			$('#diffFeeds option').each(function() {
+				g.addFeed($(this).attr('value'), $(this).attr('label'));
+			})
+
+			g.draw($('#feedContent'), { drawMode: google.feeds.FeedControl.DRAW_MODE_TABBED });
+		}
+
+		google.setOnLoadCallback(init);
+
+		function get_rss_feed() {
+			$('#feedContent').empty();
+
+			var g = new google.feeds.FeedControl();
+			g.addFeed($('#diffFeeds').val(), $("#diffFeeds option:selected").text());
+			g.draw($('#feedContent'));
+			$('#feedContent').append($('#diffFeeds').val());
+
+			/*var container = $('#feedContent');
+			for (var i = 0; i < g.feed.entries.length; i++) {
+				var entry = g.feed.entries[i];
+				var div = document.createElement("div");
+				div.appendChild(document.createTextNode(entry.title));
+				container.appendChild(div);
+			}*/
+			
+		}
 	</script>
 </head>
 <body>
 
 <div id="container">
 <div id="ui">
-<h1>Flash Feed Reader</h1>
+<form id="selectParser" action="">
 <label>Select a feed:</label>
-<select id="diffFeeds">
-	<option value="">Select</option>
+<select id="diffFeeds" onchange='get_rss_feed();'> 
+	<option value="http://feeds.feedburner.com/aralbalkan">Select</option>
 	<option value="http://feeds.feedburner.com/aralbalkan">Aral Balkan</option>
 	<option value="http://www.bit-101.com/blog/?feed=rss2">Bit-101</option>
 	<option value="http://feeds.feedburner.com/peterelst/">Peter Elst</option>
@@ -37,7 +67,7 @@
 </form>
 </div>
 <div id="feedContent">
-	&nbsp;
+	<a class="feed">Lol</a>
 </div>
 </div>
 	
