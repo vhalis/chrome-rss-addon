@@ -8,19 +8,19 @@
 	<script type="text/javascript" src="https://www.google.com/jsapi"></script>
 	<script type="text/javascript" src="jquery.gfeed.js"></script>
 	<script type="text/javascript">
-
-
+    // when the DOM is ready, convert the feed anchors into feed content 
+    $(document).ready(function() { 
+        $('a.feed').gFeed( { target: '#diffFeeds', tabs: true } ); 
+    }); 
 	</script>
 </head>
 <body>
 
 <div id="container">
-<a href="visualrinse.com"><img src="http://visualrinse.com/wp-content/themes/smooth-dirt-10/header_08v2.jpg" alt="Visualrinse" title="Visualrinse.com" /></a>
 <div id="ui">
 <h1>Flash Feed Reader</h1>
-<form id="selectParser" action="">
 <label>Select a feed:</label>
-<select id="diffFeeds" onchange="get_rss_feed();">
+<select id="diffFeeds">
 	<option value="">Select</option>
 	<option value="http://feeds.feedburner.com/aralbalkan">Aral Balkan</option>
 	<option value="http://www.bit-101.com/blog/?feed=rss2">Bit-101</option>
